@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="FieldRectangle" extends="LayoutGroup">
+    <interface>
+        <field id = "content" type="node" onChange="onContentUpdate"/> 
+        <field id = "onFocus" type="boolean" alwaysNotify = "true"/> 
+        <field id = "newColor" type="string" alwaysNotify = "true"/> 
+        <field id = "colorLevel" type="integer"/> 
+    </interface>
+    <children>
+    </children>
+    <script type="text/brightscript" uri="pkg:/components/MainGame/gameOneViews/fieldRectangle/FieldRectangle.brs"/>
+</component>

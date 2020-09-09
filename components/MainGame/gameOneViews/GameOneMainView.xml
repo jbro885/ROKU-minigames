@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="GameOneMainView" extends="Group">
+    <interface>
+        <field id = "content" type="assocArray" onChange="onContentUpdate"/> 
+        <field id = "draw" type="boolean" alwaysNotify = "true"/> 
+        <field id = "backToMainMenu" type = "boolean" alwaysNotify = "true"/>
+    </interface>
+    <children>
+    <!--That need only for catch focus -->
+        <LabelList id="mainGameFocus">
+            <ContentNode role = "content">
+                <ContentNode title = "item" />
+            </ContentNode>
+        </LabelList>
+    <Timer
+        id="engineTimer"
+        repeat="true"
+        duration="0.1"
+    />      
+    </children>
+    <script type="text/brightscript" uri="pkg:/components/MainGame/gameOneViews/GameOneMainView.brs"/>
+</component>

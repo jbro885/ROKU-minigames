@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="AnimationInterface" extends="ContentNode">
+    <interface>
+        <field id = "startPosition" type="integer"/> 
+        <field id = "finishPosition" type="integer"/> 
+    </interface>
+</component>

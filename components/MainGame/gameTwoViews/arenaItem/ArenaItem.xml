@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="ArenaItem" extends="LayoutGroup">
+    <interface>
+        <field id = "content" type="node" onChange="onContentUpdate"/> 
+    </interface>
+    <children>
+    </children>
+    <script type="text/brightscript" uri="pkg:/components/MainGame/gameTwoViews/arenaItem/ArenaItem.brs"/>
+</component>

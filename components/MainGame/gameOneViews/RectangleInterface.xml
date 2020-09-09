@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="RectangleInterface" extends="ContentNode">
+    <interface>
+        <field id = "height" type="integer"/> 
+        <field id = "width" type="integer"/> 
+        <field id = "color" type="string"/> 
+        <field id = "colorLevel" type="string"/> 
+    </interface>
+</component>

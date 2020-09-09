@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="ArenaItemInterface" extends="ContentNode">
+    <interface>
+        <field id = "itemType" type="string"/>  
+        <field id = "width" type="integer"/>  
+        <field id = "height" type="integer"/>  
+    </interface>
+</component>
