@@ -8,8 +8,7 @@ function GetAppController()
         prototype.initApp = function()
             m.mainMenuController = GetMainMenuController()
             m.gameModel = GetGameModel()
-            m.gameOneController = GetGameOneController()
-            m.gameTwoController = GetGameTwoController()
+            m.gameController = GetGameTwoController()
         end function
         
         prototype.startApp = function(mainContainer)
@@ -26,6 +25,12 @@ function GetAppController()
             m.mainMenuController.addEventListener(m.eventTypes.EXIT_PRESSED, "_onExitHandled", m)
         end function
 
+        prototype._backToMainMenuHandled = function()
+            m.gameController.removeEventListener(m.eventTypes.ON_BACK_TO_MAIN_MENU, "_onExitHandled", m)
+            m._clearMainView()
+            m._showMainMenu()
+        end function    
+
         prototype._clearMainView = function()
             m.appContainer.removeChildIndex(m.appContainer.getChildCount() - 1)
         end function    
@@ -41,7 +46,6 @@ function GetAppController()
             m.gameModel.addEventListener(m.eventTypes.GAME_DATA_PARSED, "_onGameDataParsedStartGame", m)
             m.gameModel._requestGameData(currentGameId)
 
-  
         end function
 
         prototype._onGameDataParsedStartGame = function()
@@ -51,13 +55,17 @@ function GetAppController()
                 gameId = m.gameModel.getCurrentGameId()
             end if    
             if (gameData <> invalid and gameData.currentgameid = "gameOne" or gameId = "gameOne")
-                m.gameOneController.initController()
-                m.gameOneController.createView(m.appContainer)
-                m.gameOneController.start()
-            else if (gameData.currentgameid = "gameTwo")   
-                m.gameTwoController.initController()
-                m.gameTwoController.createView(m.appContainer)
-                m.gameTwoController.start(gameData)
+                m.gameController = GetGameOneController()
+                m.gameController.initController()
+                m.gameController.createView(m.appContainer)
+                m.gameController.start()
+                m.gameController.addEventListener(m.eventTypes.ON_BACK_TO_MAIN_MENU, "_backToMainMenuHandled", m)
+            else if (gameData.currentgameid = "gameTwo")  
+                m.gameController = GetGameTwoController() 
+                m.gameController.initController()
+                m.gameController.createView(m.appContainer)
+                m.gameController.start(gameData)
+                m.gameController.addEventListener(m.eventTypes.ON_BACK_TO_MAIN_MENU, "_backToMainMenuHandled", m)
             end if    
         end function   
             

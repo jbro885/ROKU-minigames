@@ -12,6 +12,7 @@
   <script type="text/brightscript" uri="pkg:/source/controllers/gameOneControllers/GameOneController.brs"/>
   <script type="text/brightscript" uri="pkg:/source/controllers/gameTwoControllers/GameTwoController.brs"/>
 
+  <script type="text/brightscript" uri="pkg:/source/mediators/BaseMediator.brs"/>
   <script type="text/brightscript" uri="pkg:/source/mediators/MainMenuMediator.brs"/>
   <script type="text/brightscript" uri="pkg:/source/mediators/gameOneMediator/GameOneMediator.brs"/>
   <script type="text/brightscript" uri="pkg:/source/mediators/gameTwoMediator/GameTwoMediator.brs"/>

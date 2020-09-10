@@ -37,16 +37,6 @@ function onContentUpdate()
         newGameLabel.id = "newGame"
         mainMenuListContent.appendChild(newGameLabel)
 
-        settingsLabel = CreateObject("roSGNode", "ContentNode")
-        settingsLabel.title = "Settings"
-        settingsLabel.id = "settings"
-        mainMenuListContent.appendChild(settingsLabel)
-
-        exitLabel = CreateObject("roSGNode", "ContentNode")
-        exitLabel.title = "Exit"
-        exitLabel.id = "exit"
-        mainMenuListContent.appendChild(exitLabel)
-
         m.mainMenuListContainer.content = mainMenuListContent 
     end if    
 end function    
