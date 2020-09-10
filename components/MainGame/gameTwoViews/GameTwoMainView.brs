@@ -53,6 +53,10 @@ function playerMovement()
             end if    
 
         else if (m.pressedKey = "down" and checkCharactersColision([m.character.translation[0], m.character.translation[1]  + m.character.speed]))
+            if (m.character.translation[1] > 1000)
+                m.isPress = false
+                return true
+            end if
             m.character.translation = [m.character.translation[0], m.character.translation[1]  + m.character.speed]
         else if (m.pressedKey = "left" and checkCharactersColision([m.character.translation[0] - m.character.speed, m.character.translation[1]]))
             if (m.character.translation[0] < 0)
@@ -67,9 +71,21 @@ function playerMovement()
             end if
             m.character.translation = [m.character.translation[0], m.character.translation[1] - m.character.speed]
         end if
+        checkForWin()
+    
         m.character.direction = m.pressedKey
     end if
 end function
+
+function checkForWin()
+    characterX = m.character.translation[0]
+    characterY = m.character.translation[1]
+    lastAsset = m.arenaContainer.getChild(m.arenaContainer.getChildCount() - 1)
+    if ((characterX = lastAsset.translation[0] or characterX > lastAsset.translation[0]) and (characterY = lastAsset.translation[1] or characterY > lastAsset.translation[1])) 
+        m.character.translation= [0 , 0]
+        backToMainMenu()
+    end if
+end function    
 
 function buildArena()
     for t = 0 to m.gameData.walls.count() - 1
