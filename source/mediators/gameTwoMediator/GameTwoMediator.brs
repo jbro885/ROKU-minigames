@@ -8,8 +8,8 @@ function GetGameTwoMediator()
             m._gameView.observeField("backToMainMenu", "onBackToMainMenuHandled")
         end function
 
-        prototype.startGame = function()
-            m._gameView.draw = true
+        prototype.startGame = function(gameData)
+            m._gameView.content = gameData
         end function    
         
         prototype._backToMainMenuHandled = function()

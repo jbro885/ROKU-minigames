@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="PlayerCharacter" extends="Group">
+    <script type="text/brightscript" uri="pkg:/components/MainGame/gameTwoViews/playerCharacter/PlayerCharacter.brs"/>
+    <interface>
+        <field id = "speed" type = "integer"/>
+        <field id = "size" type = "integer"/>
+        <field id = "direction" type = "string"/>
+    </interface>
+    <children>
+        <Poster id="playerTexture"/>
+    </children>
+</component>

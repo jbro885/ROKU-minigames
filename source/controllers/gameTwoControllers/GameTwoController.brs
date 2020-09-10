@@ -11,8 +11,8 @@ function GetGameTwoController()
             m._gameTwoMediator.createView(appContainer)
         end function    
 
-        prototype.start = function()
-            m._gameTwoMediator.startGame()
+        prototype.start = function(gameData)
+            m._gameTwoMediator.startGame(gameData)
         end function    
 
         m._gameTwoController = prototype

@@ -107,7 +107,6 @@ function onKeyEvent(key, press)
             createAnimation()
         else if (key = "back")
             backToMainMenu()
-             ? "onKeyEvent key" key 
              return true   
         end if
     end if    

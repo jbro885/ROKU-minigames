@@ -16,6 +16,11 @@ function GetEventType() as Object
 
     prototype.ON_BACK_TO_MAIN_MENU = "ON_BACK_TO_MAIN_MENU"
 
+    prototype.ON_GAME_DATA_REQUEST_SUCCESS = "ON_GAME_DATA_REQUEST_SUCCESS"
+    prototype.ON_GAME_DATA_REQUEST_FAIL = "ON_GAME_DATA_REQUEST_FAIL"
+
+    prototype.GAME_DATA_PARSED = "GAME_DATA_PARSED"
+
     m._eventTypeSingleton = prototype
   end if
 

@@ -37,18 +37,30 @@ function GetAppController()
 
             m._clearMainView()
 
-            currentGameData = m.gameModel.getCurrentGameData()
-            if (currentGameData = "gameOne")
+            currentGameId = m.gameModel.getCurrentGameId()
+            m.gameModel.addEventListener(m.eventTypes.GAME_DATA_PARSED, "_onGameDataParsedStartGame", m)
+            m.gameModel._requestGameData(currentGameId)
+
+  
+        end function
+
+        prototype._onGameDataParsedStartGame = function()
+            gameData = m.gameModel.getGameData()
+            gameId = ""
+            if (gameData = invalid)
+                gameId = m.gameModel.getCurrentGameId()
+            end if    
+            if (gameData <> invalid and gameData.currentgameid = "gameOne" or gameId = "gameOne")
                 m.gameOneController.initController()
                 m.gameOneController.createView(m.appContainer)
                 m.gameOneController.start()
-            else if (currentGameData = "gameTwo")   
+            else if (gameData.currentgameid = "gameTwo")   
                 m.gameTwoController.initController()
                 m.gameTwoController.createView(m.appContainer)
-                m.gameTwoController.start()
+                m.gameTwoController.start(gameData)
             end if    
-        end function
-
+        end function   
+            
         m._appController = prototype
     end if
     
