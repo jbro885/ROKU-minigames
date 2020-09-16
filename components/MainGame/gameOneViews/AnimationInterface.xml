@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="AnimationInterface" extends="ContentNode">
     <interface>
-        <field id = "startPosition" type="integer"/> 
+        <field id = "startPosition" type="array"/> 
         <field id = "finishPosition" type="integer"/> 
+        <field id = "visitedArray" type="array"/> 
     </interface>
 </component>

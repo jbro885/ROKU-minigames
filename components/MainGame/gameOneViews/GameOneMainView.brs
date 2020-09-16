@@ -1,5 +1,5 @@
 function init()
-    m.WIDTH_RECT_COUNT = 20 
+    m.WIDTH_RECT_COUNT = 20
     m.HEIGHT_RECT_COUNT = 20 
     m.top.observeField("draw", "onStartNewGame")
 
@@ -47,6 +47,25 @@ function setItemFocus(index)
     focusedItem.onFocus = true
 end function    
 
+function calculateNeighbors(currentBlockX, currentBlockY)
+    neighbors = []
+    currentXYPosition = (currentBlockY * m.HEIGHT_RECT_COUNT) + currentBlockX
+    if (currentBlockY - 1 > -1)
+        neighbors.push(currentXYPosition - m.HEIGHT_RECT_COUNT)
+    end if    
+    if (currentBlockX - 1 > -1)
+        neighbors.push(currentXYPosition - 1)
+    end if    
+    if (currentBlockX + 1 <= m.WIDTH_RECT_COUNT - 1)
+        neighbors.push(currentXYPosition + 1)
+    end if 
+    if (currentBlockY + 1 <= m.HEIGHT_RECT_COUNT - 1)
+        neighbors.push(currentXYPosition + m.HEIGHT_RECT_COUNT)
+    end if 
+    
+    return neighbors
+end function    
+
 function buildArena()
     for t = 0 to m.HEIGHT_RECT_COUNT - 1
         for i = 0 to m.WIDTH_RECT_COUNT - 1
@@ -56,6 +75,7 @@ function buildArena()
             rectData.height = 1080 / m.HEIGHT_RECT_COUNT
             rectData.color = "#F0F0F5"
             rectData.colorLevel = 0
+            rectData.neighbors = calculateNeighbors(i, t)
             fieldRect.content = rectData
             fieldRect.translation = [rectData.width * i, rectData.height * t]
             m.arenaContainer.appendChild(fieldRect)
@@ -64,26 +84,52 @@ function buildArena()
 end function
 
 function createAnimation()
-    finishPosition = (Fix((m.currentFocusedItemIndex + m.WIDTH_RECT_COUNT) / m.WIDTH_RECT_COUNT) * m.WIDTH_RECT_COUNT) - 1
+    finishPosition = m.arenaContainer.getChildCount() - 1
 
     animationData = CreateObject("roSGNode", "AnimationInterface")
-    animationData.startPosition = m.currentFocusedItemIndex
+    animationData.startPosition = [m.currentFocusedItemIndex]
     animationData.finishPosition = finishPosition
+    animationData.visitedArray = []
     m.animationsArray.push(animationData)
 end function 
+
+function findInVisitArray(visitedArray, neighborItem)
+    if (visitedArray.count() > 0)
+        for each item in visitedArray
+            if (item = neighborItem)
+                return true
+                exit for
+            end if    
+        end for
+        return false
+    end if 
+    return false
+end function    
 
 function engineProcess()
     for i = 0 to m.animationsArray.count() - 1
         animationItem = m.animationsArray[i]
         if (animationItem <> invalid)
-            arenaItem = m.arenaContainer.getChild(animationItem.startPosition)
-            arenaItem.newColor = setNewColorLevel(arenaItem.colorLevel)
-            arenaItem.colorLevel = arenaItem.colorLevel + 1
-            if (arenaItem.colorLevel > m.colorLevelArray.count() - 1 or arenaItem.colorLevel = m.colorLevelArray.count() - 1) then arenaItem.colorLevel = 0
-            if (animationItem.startPosition + 1 > animationItem.finishPosition)
-                m.animationsArray.Delete(i)
-            else
-                animationItem.startPosition += 1
+            arayOfNewStartPositions = []
+            visitedArray = animationItem.visitedArray
+            ? "visitedArray" visitedArray
+            for each startPositionItem in animationItem.startPosition
+                arenaItem = m.arenaContainer.getChild(startPositionItem)
+                for each item in arenaItem.content.neighbors
+                    neighborItem = m.arenaContainer.getChild(item)
+                    if (findInVisitArray(visitedArray, item) = false)
+                        neighborItem.newColor = setNewColorLevel(neighborItem.colorLevel)
+                        neighborItem.colorLevel = neighborItem.colorLevel + 1
+                        visitedArray.push(item)
+                        if (neighborItem.colorLevel > m.colorLevelArray.count() - 1 or neighborItem.colorLevel = m.colorLevelArray.count() - 1) then neighborItem.colorLevel = 0
+                        arayOfNewStartPositions.push(item)
+                    end if  
+                end for  
+                animationItem.visitedArray = visitedArray
+                animationItem.startPosition = arayOfNewStartPositions   
+            end for    
+            if (arayOfNewStartPositions.count() = 0)
+                m.animationsArray.Delete(i) 
             end if    
         end if
     end for    
@@ -109,6 +155,7 @@ function onKeyEvent(key, press)
             backToMainMenu()
              return true   
         end if
+        ? "m.currentFocusedItemIndex" m.currentFocusedItemIndex m.arenaContainer.getChild(m.currentFocusedItemIndex).content.neighbors
     end if    
   return false
 end function

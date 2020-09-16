@@ -5,6 +5,7 @@
         <field id = "onFocus" type="boolean" alwaysNotify = "true"/> 
         <field id = "newColor" type="string" alwaysNotify = "true"/> 
         <field id = "colorLevel" type="integer"/> 
+        <field id = "visited" type="boolean" />
     </interface>
     <children>
     </children>
