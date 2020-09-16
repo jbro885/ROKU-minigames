@@ -112,7 +112,6 @@ function engineProcess()
         if (animationItem <> invalid)
             arayOfNewStartPositions = []
             visitedArray = animationItem.visitedArray
-            ? "visitedArray" visitedArray
             for each startPositionItem in animationItem.startPosition
                 arenaItem = m.arenaContainer.getChild(startPositionItem)
                 for each item in arenaItem.content.neighbors
@@ -155,7 +154,6 @@ function onKeyEvent(key, press)
             backToMainMenu()
              return true   
         end if
-        ? "m.currentFocusedItemIndex" m.currentFocusedItemIndex m.arenaContainer.getChild(m.currentFocusedItemIndex).content.neighbors
     end if    
   return false
 end function

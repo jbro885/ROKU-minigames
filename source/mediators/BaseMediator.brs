@@ -4,7 +4,6 @@ function GetBaseMediator()
         prototype.eventTypes = GetEventType()
 
         prototype._backToMainMenuHandled = function()
-            ? "_gameBaseMediator _backToMainMenuHandled"
             m.dispatchEvent(m.eventTypes.ON_BACK_TO_MAIN_MENU)
         end function    
 
