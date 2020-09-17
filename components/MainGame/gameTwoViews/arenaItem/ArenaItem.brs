@@ -1,6 +1,7 @@
 function init()
     m.top.observeField("content", "onContentUpdate")
     m.top.observeField("weight", "onWeightUpdate")
+    m.top.observeField("isShortestPathItem", "onShortPathShow")
     m.itemPoster = m.top.createChild("Poster")
     m.itemPosterLabel = m.itemPoster.createChild("Label")
 end function    
@@ -10,10 +11,13 @@ function onContentUpdate()
     if (content.itemType = "wall")
         m.itemPoster.uri = "pkg:/images/grassTile.jpg"
     else if (content.itemType = "way") 
-        ' m.itemPoster.uri = "pkg:/images/asphalt.jpg"  
     end if
     m.itemPoster.width = content.width
     m.itemPoster.height = content.height
+end function   
+
+function onShortPathShow()
+    m.itemPoster.uri = "pkg:/images/asphalt.jpg"  
 end function    
 
 function onWeightUpdate()

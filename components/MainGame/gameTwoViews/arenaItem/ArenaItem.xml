@@ -4,6 +4,8 @@
         <field id = "content" type="node" onChange="onContentUpdate"/>
         <field id = "weight" type="string"/>   
         <field id = "weightInt" type="integer"/>   
+        <field id = "cameFrom" type="array"/>
+        <field id = "isShortestPathItem" type="boolean" />   
     </interface>
     <children>
     </children>

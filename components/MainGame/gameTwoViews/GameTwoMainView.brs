@@ -66,6 +66,15 @@ function calculateShortestPath()
             arenaItem = m.arenaContainer.getChild(startPositionItem)
             for each item in arenaItem.content.neighbors
                 neighborItem = m.arenaContainer.getChild(item)
+                if (neighborItem.cameFrom <> Invalid)
+                    currentArayOfParrents = neighborItem.cameFrom
+                    currentArayOfParrents.push(startPositionItem)
+                    neighborItem.cameFrom = currentArayOfParrents
+                else
+                    currentArayOfParrents = []
+                    currentArayOfParrents.push(startPositionItem)
+                    neighborItem.cameFrom = currentArayOfParrents
+                end if    
                 if (findInVisitArray(visitedArray, item) = false)
                     neighborItem.weight = minimalWeight + 1
                     neighborItem.weightInt = minimalWeight + 1
@@ -92,19 +101,27 @@ function calculateShortestPath()
 end function  
 
 function findWay()
-    maxWeight = 10
-    arayPath = []
-    maxCountRevers = (m.arenaContainer.getChildCount() - 1) * -1
-    while maxWeight > 0
-        for i = maxCountRevers to 0
-            item = m.arenaContainer.getChild(i * -1)
-            if (item.weightInt = maxWeight)
-                arayPath.push(i * -1)
-                maxWeight = maxWeight -1
-                exit for
-            end if
-        end for
+    lastItem  = m.arenaContainer.getChild(m.arenaContainer.getChildCount() - 1)
+    maxWeight = lastItem.weightInt
+    arrayPath = []
+    maxCount = m.arenaContainer.getChildCount() - 1
+    arrayPath = [m.arenaContainer.getChildCount() - 1]
+    while maxWeight > 0  
+        maxWeight = maxWeight - 1     
+        itemArena = m.arenaContainer.getChild(arrayPath.Peek())
+        if (itemArena.content.itemType = "way")
+            if (itemArena.cameFrom <> invalid)
+                for each item in itemArena.cameFrom
+                    cameFromItem = m.arenaContainer.getChild(item)
+                    if (cameFromItem.weightInt = maxWeight)
+                        arrayPath.push(item)
+                            exit for
+                        end if
+                    end for  
+                end if    
+            end if    
     end while  
+    m.finalWay = arrayPath
 end function
 
 function findInVisitArray(visitedArray, neighborItem)
@@ -246,10 +263,19 @@ function backToMainMenu()
     m.top.backToMainMenu = true
 end function    
 
+function showShortPath()
+    for each item in m.finalWay
+        itemArena = m.arenaContainer.getChild(item)
+        itemArena.isShortestPathItem = true
+    end for    
+end function
+
 function onKeyEvent(key, press)
     if (key = "right" or key = "left" or key = "up" or key = "down")
         m.isPress = press
         m.pressedKey = key
+    else if (key = "OK")
+        showShortPath()    
     else if (key = "back")
         backToMainMenu()
         return true   
