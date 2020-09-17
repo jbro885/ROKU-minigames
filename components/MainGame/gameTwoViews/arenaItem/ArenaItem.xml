@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="ArenaItem" extends="LayoutGroup">
     <interface>
-        <field id = "content" type="node" onChange="onContentUpdate"/> 
+        <field id = "content" type="node" onChange="onContentUpdate"/>
+        <field id = "weight" type="string"/>   
+        <field id = "weightInt" type="integer"/>   
     </interface>
     <children>
     </children>

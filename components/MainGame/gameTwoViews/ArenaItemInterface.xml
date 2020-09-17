@@ -4,5 +4,7 @@
         <field id = "itemType" type="string"/>  
         <field id = "width" type="integer"/>  
         <field id = "height" type="integer"/>  
+        <field id = "weight" type="string"/>  
+        <field id = "neighbors" type="array"/>
     </interface>
 </component>
